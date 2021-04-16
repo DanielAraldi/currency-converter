@@ -54,6 +54,7 @@ const fetchExchangeRate = async () => {
     button.addEventListener("click", () => div.remove());
 
     div.appendChild(button);
+    // Add alert after the currencies
     currenciesEl.insertAdjacentElement("afterend", div);
   }
 };
@@ -62,12 +63,18 @@ const init = async () => {
   const exchangeRateData = await fetchExchangeRate();
 
   // Return name property of the object
-  const options = Object.keys(exchangeRateData.conversion_rates)
-    .map((currency) => `<option>${currency}</option>`)
-    .join("");
+  const getOptions = (selectedCurrency) =>
+    Object.keys(exchangeRateData.conversion_rates)
+      .map(
+        (currency) =>
+          `<option ${
+            currency === selectedCurrency ? "selected" : ""
+          }>${currency}</option>`
+      )
+      .join("");
 
-  currencyOneEl.innerHTML = options;
-  currencyTwoEl.innerHTML = options;
+  currencyOneEl.innerHTML = getOptions("USD");
+  currencyTwoEl.innerHTML = getOptions("BRL");
 };
 
 init();
