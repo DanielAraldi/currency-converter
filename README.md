@@ -44,7 +44,11 @@ Idealizado como proposta de ensino para estudantes de JavaScript.
   $ git clone https://github.com/DanielAraldi/currency-converter.git
 ```
 
-2. Executando a Aplicação:
+2. Crie um arquivo `env.js`:
+
+- Com base no arquivo `env.example.js` do projeto, crie um arquivo chamado `env.js` e insira os mesmo scripts do `env.example.js` nele, será no `env.js` que você colocará sua chave da API que foi proporcionada pela [ExchangeRate-API](https://www.exchangerate-api.com/).
+
+3. Executando a Aplicação:
 
 - Executar o arquivo [HTML](index.html) no Browser (Navegador).
 
