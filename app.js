@@ -100,30 +100,7 @@ const init = async () => {
   if (internalExchangeRate.conversion_rates) showInitialInfo();
 };
 
-timesCurrencyOneEl.addEventListener("input", (e) => {
-  convertedValueEl.textContent = (
-    e.target.value * internalExchangeRate.conversion_rates[currencyTwoEl.value]
-  ).toFixed(2);
-});
-
-currencyTwoEl.addEventListener("input", (e) => {
-  const currencyTwoValue =
-    internalExchangeRate.conversion_rates[e.target.value];
-
-  convertedValueEl.textContent = (
-    timesCurrencyOneEl.value * currencyTwoValue
-  ).toFixed(2);
-
-  valuePrecisionEl.textContent = `1 ${currencyOneEl.value} = ${
-    1 * internalExchangeRate.conversion_rates[currencyTwoEl.value]
-  } ${currencyTwoEl.value}`;
-});
-
-currencyOneEl.addEventListener("input", async (e) => {
-  internalExchangeRate = {
-    ...(await fetchExchangeRate(getUrl(e.target.value))),
-  };
-
+const showUpdatedRates = () => {
   convertedValueEl.textContent = (
     timesCurrencyOneEl.value *
     internalExchangeRate.conversion_rates[currencyTwoEl.value]
@@ -131,6 +108,22 @@ currencyOneEl.addEventListener("input", async (e) => {
   valuePrecisionEl.textContent = `1 ${currencyOneEl.value} = ${
     1 * internalExchangeRate.conversion_rates[currencyTwoEl.value]
   } ${currencyTwoEl.value}`;
+};
+
+timesCurrencyOneEl.addEventListener("input", (e) => {
+  convertedValueEl.textContent = (
+    e.target.value * internalExchangeRate.conversion_rates[currencyTwoEl.value]
+  ).toFixed(2);
+});
+
+currencyTwoEl.addEventListener("input", showUpdatedRates);
+
+currencyOneEl.addEventListener("input", async (e) => {
+  internalExchangeRate = {
+    ...(await fetchExchangeRate(getUrl(e.target.value))),
+  };
+
+  showUpdatedRates();
 });
 
 init();
