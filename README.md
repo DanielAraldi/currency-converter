@@ -7,7 +7,7 @@
 <p align="center">
     <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/DanielAraldi/currency-converter?style=flat-square">
     <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/DanielAraldi/currency-converter?style=flat-square">
-    <img alt="GitHub" src="https://img.shields.io/github/license/DanielAraldi/currency-converter?style=flat-square">
+    <img alt="GitHub" src="https://img.shields.io/github/license/DanielAraldi/Currency-converter?style=flat-square">
     <img alt="Made by Roger Melo" src="https://img.shields.io/badge/made%20by-RogerMelo-%237519C1?style=flat-square"><br/>
 </p>
 
