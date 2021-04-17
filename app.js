@@ -73,29 +73,31 @@ const fetchExchangeRate = async (url) => {
   }
 };
 
+const showInitialInfo = () => {
+  // Return name property of the object
+  const getOptions = (selectedCurrency) =>
+    Object.keys(internalExchangeRate.conversion_rates)
+      .map(
+        (currency) =>
+          `<option ${
+            currency === selectedCurrency ? "selected" : ""
+          }>${currency}</option>`
+      )
+      .join("");
+
+  currencyOneEl.innerHTML = getOptions("USD");
+  currencyTwoEl.innerHTML = getOptions("BRL");
+
+  convertedValueEl.textContent = internalExchangeRate.conversion_rates.BRL.toFixed(
+    2
+  );
+  valuePrecisionEl.textContent = `1 USD = ${internalExchangeRate.conversion_rates.BRL} BRL`;
+};
+
 const init = async () => {
   internalExchangeRate = { ...(await fetchExchangeRate(getUrl("USD"))) };
 
-  if (internalExchangeRate.conversion_rates) {
-    // Return name property of the object
-    const getOptions = (selectedCurrency) =>
-      Object.keys(internalExchangeRate.conversion_rates)
-        .map(
-          (currency) =>
-            `<option ${
-              currency === selectedCurrency ? "selected" : ""
-            }>${currency}</option>`
-        )
-        .join("");
-
-    currencyOneEl.innerHTML = getOptions("USD");
-    currencyTwoEl.innerHTML = getOptions("BRL");
-
-    convertedValueEl.textContent = internalExchangeRate.conversion_rates.BRL.toFixed(
-      2
-    );
-    valuePrecisionEl.textContent = `1 USD = ${internalExchangeRate.conversion_rates.BRL} BRL`;
-  }
+  if (internalExchangeRate.conversion_rates) showInitialInfo();
 };
 
 timesCurrencyOneEl.addEventListener("input", (e) => {
